@@ -2,14 +2,15 @@
 import React, { useState } from "react";
 import "./App.css";
 
-export default function App() { // export default class App extends Component 클래스 컴포넌트일 때
+export default function App() {
+  // export default class App extends Component 클래스 컴포넌트일 때
 
   // state = {
   //   todoData: [],
   //   value: "",
   // }; 클래스 컴포넌트
 
-  // 함수형 
+  // 함수형
   const [todoData, setTodoData] = useState([]);
   const [value, setValue] = useState("");
 
@@ -20,32 +21,32 @@ export default function App() { // export default class App extends Component �
     padding: "5px 9px",
     borderRadius: "50%",
     cursor: "pointer",
-    float: "right"
-  }
+    float: "right",
+  };
 
   // getStyle 함수 (체크박스 누르면 줄 긋도록 동적으로 만들어야함)
   const getStyle = (completed) => {
     return {
       padding: "10px",
       borderBottom: "1px #ccc dotted",
-      textDecoration: completed ? "line-through" : 'none',
-    }
-  }
+      textDecoration: completed ? "line-through" : "none",
+    };
+  };
 
   // 할 일 목록 삭제할 때
   const handleClick = (id) => {
-    let newTodoData = todoData.filter(data => data.id != id)
+    let newTodoData = todoData.filter((data) => data.id !== id);
     //console.log('newTodoData', newTodoData)
     // this.setState({ todoData: newTodoData }); 클래스 컴포넌트
-    setTodoData(newTodoData)
-  }
+    setTodoData(newTodoData);
+  };
 
   // 할 일 입력 이벤트 value값 바꿔주기
   const handleChange = (e) => {
-    console.log('e', e.target.value);
+    console.log("e", e.target.value);
     // this.setState({ value: e.target.value }) 클래스
     setValue(e.target.value);
-  }
+  };
 
   // 할 일 입력 후 목록에 추가하고 쓴거 지워주기
   const handleSubmit = (e) => {
@@ -61,7 +62,7 @@ export default function App() { // export default class App extends Component �
     // this.setState({ todoData: [...todoData, newTodo], value: "" }); 클래스
     setTodoData((prev) => [...prev, newTodo]);
     setValue("");
-  }
+  };
 
   // checkbox 바꿔주는 함수
   const handleCompleChange = (id) => {
@@ -74,7 +75,7 @@ export default function App() { // export default class App extends Component �
 
     //this.setState({ todoData: newTodoData }); 클래스
     setTodoData(newTodoData);
-  }
+  };
 
   // 함수형은 render 없이 바로 return
   return (
@@ -85,11 +86,15 @@ export default function App() { // export default class App extends Component �
         </div>
         {todoData.map((data) => (
           <div style={getStyle(data.completed)} key={data.id}>
-            <input type="checkbox" defaultChecked={false}
+            <input
+              type="checkbox"
+              defaultChecked={false}
               onChange={() => handleCompleChange(data.id)}
             />
             {data.title}
-            <button style={btnstyle} onClick={() => handleClick(data.id)}>X</button>
+            <button style={btnstyle} onClick={() => handleClick(data.id)}>
+              X
+            </button>
           </div>
         ))}
 
@@ -106,13 +111,10 @@ export default function App() { // export default class App extends Component �
             type="submit"
             value="입력"
             className="btn"
-            style={{ flex: '1' }}
+            style={{ flex: "1" }}
           />
         </form>
-
-
       </div>
     </div>
   );
-
 }
