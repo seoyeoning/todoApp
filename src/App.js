@@ -40,6 +40,8 @@ export default function App() {
           <h1>할 일 목록</h1>
         </div>
 
+        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+
         {/* props로 내려줌 (자식 컴포넌 트에) */}
         <List todoData={todoData} setTodoData={setTodoData} />
 
