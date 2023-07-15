@@ -1,7 +1,7 @@
 // 클래스형 컴포넌트
 import React, { useState } from "react";
 import "./App.css";
-import List from "./components/List";
+import Lists from "./components/Lists";
 import Form from "./components/Form";
 
 export default function App() {
@@ -40,8 +40,8 @@ export default function App() {
           <h1>할 일 목록</h1>
         </div>
 
-        {/* props로 내려줌 (자식 컴포넌 트에) */}
-        <List todoData={todoData} setTodoData={setTodoData} />
+        {/* props로 내려줌 (자식 컴포넌트에) */}
+        <Lists todoData={todoData} setTodoData={setTodoData} />
 
         <Form handleSubmit={handleSubmit} value={value} setValue={setValue} />
       </div>

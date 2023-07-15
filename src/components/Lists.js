@@ -5,7 +5,7 @@
 import React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
-export default function List({ todoData, setTodoData }) {
+export default function Lists({ todoData, setTodoData }) {
   // x버튼 (함수형 만들 때 const 추가해주기)
   // const btnstyle = {
   //   color: "#fff",
