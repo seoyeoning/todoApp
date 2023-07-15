@@ -3,6 +3,7 @@
 // rce : 클래스형 컴포넌트
 
 import React from "react";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 export default function List({ todoData, setTodoData }) {
   // x버튼 (함수형 만들 때 const 추가해주기)
@@ -44,32 +45,79 @@ export default function List({ todoData, setTodoData }) {
   //   };
   // };
 
+  const handleEnd = (result) => {
+    // result에는 source, destination 등 여러 정보가 포함됨
+    console.log("result", result);
+
+    // 목적지가 없으면 return(이벤트 취소)
+    if (!result.destination) return;
+
+    // 불변성을 위해 원래 데이터 담아줌
+    const newTodoData = todoData;
+
+    // 1. 변경시키는 아이템을 배열에서 지워주기 result.source.index(원래 인덱스), 1(몇개 없애줄건지)
+    // 2. return 값으로 지워진 아이템을 잡아주기
+
+    const [reorderItem] = newTodoData.splice(result.source.index, 1);
+
+    // 원하는 자리에 추가 result.destination.index(목적지 인덱스),0,reorderItem
+    newTodoData.splice(result.destination.index, 0, reorderItem);
+    setTodoData(newTodoData);
+  };
+
   return (
     <div>
-      {todoData.map((data) => (
-        <div key={data.id}>
-          <div className="flex items-center justify-between h-full px-4 py-1 my-2 text-gray-600 bg-gray-100 border rounded ">
-            <div className="items-center ">
-              <input
-                type="checkbox"
-                defaultChecked={data.completed}
-                onChange={() => handleCompleChange(data.id)}
-              />{" "}
-              <span className={data.completed ? "line-through" : undefined}>
-                {data.title}{" "}
-              </span>
+      <DragDropContext onDragEnd={handleEnd}>
+        <Droppable droppableId="anything">
+          {(provided) => (
+            <div {...provided.droppableProps} ref={provided.innerRef}>
+              {todoData.map((data, index) => (
+                <Draggable
+                  key={data.id}
+                  draggableId={data.id.toString()}
+                  index={index}
+                >
+                  {(provided, snapshot) => (
+                    <div
+                      key={data.id}
+                      {...provided.draggableProps}
+                      ref={provided.innerRef}
+                      {...provided.dragHandleProps}
+                      className={`${
+                        snapshot.isDragging ? "bg-gray-400" : "bg-gray-100"
+                      } flex items-center justify-between h-full px-4 py-1 my-2 text-gray-600 border rounded`}
+                    >
+                      <div className="items-center">
+                        <input
+                          type="checkbox"
+                          defaultChecked={data.completed}
+                          onChange={() => handleCompleChange(data.id)}
+                        />{" "}
+                        <span
+                          className={
+                            data.completed ? "line-through" : undefined
+                          }
+                        >
+                          {data.title}{" "}
+                        </span>
+                      </div>
+                      <div className="items-center">
+                        <button
+                          className="px-4 py-2"
+                          onClick={() => handleClick(data.id)}
+                        >
+                          X
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
             </div>
-            <div className="items-center">
-              <button
-                className="px-4 py-2"
-                onClick={() => handleClick(data.id)}
-              >
-                X
-              </button>
-            </div>
-          </div>
-        </div>
-      ))}
+          )}
+        </Droppable>
+      </DragDropContext>
     </div>
   );
 }
