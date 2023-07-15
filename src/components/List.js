@@ -1,7 +1,16 @@
 import React from "react";
 
 const List = React.memo(
-  ({ id, title, completed, todoData, setTodoData, provided, snapshot }) => {
+  ({
+    id,
+    title,
+    completed,
+    todoData,
+    setTodoData,
+    provided,
+    snapshot,
+    handleClick,
+  }) => {
     console.log("List Component");
 
     // checkbox 바꿔주는 함수
@@ -13,14 +22,6 @@ const List = React.memo(
         return data;
       });
       //this.setState({ todoData: newTodoData }); 클래스
-      setTodoData(newTodoData);
-    };
-
-    // 할 일 목록 삭제할 때
-    const handleClick = (id) => {
-      let newTodoData = todoData.filter((data) => data.id !== id);
-      //console.log('newTodoData', newTodoData)
-      // this.setState({ todoData: newTodoData }); 클래스 컴포넌트
       setTodoData(newTodoData);
     };
 

@@ -1,5 +1,5 @@
 // 클래스형 컴포넌트
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import "./App.css";
 import Lists from "./components/Lists";
 import Form from "./components/Form";
@@ -33,6 +33,17 @@ export default function App() {
     setValue("");
   };
 
+  // 할 일 목록 삭제할 때
+  const handleClick = useCallback(
+    (id) => {
+      let newTodoData = todoData.filter((data) => data.id !== id);
+      //console.log('newTodoData', newTodoData)
+      // this.setState({ todoData: newTodoData }); 클래스 컴포넌트
+      setTodoData(newTodoData);
+    },
+    [todoData]
+  );
+
   // 함수형은 render 없이 바로 return
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-blue-100">
@@ -42,7 +53,11 @@ export default function App() {
         </div>
 
         {/* props로 내려줌 (자식 컴포넌트에) */}
-        <Lists todoData={todoData} setTodoData={setTodoData} />
+        <Lists
+          todoData={todoData}
+          setTodoData={setTodoData}
+          handleClick={handleClick}
+        />
 
         <Form handleSubmit={handleSubmit} value={value} setValue={setValue} />
       </div>
