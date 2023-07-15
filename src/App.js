@@ -5,6 +5,7 @@ import Lists from "./components/Lists";
 import Form from "./components/Form";
 
 export default function App() {
+  console.log("App Component");
   // export default class App extends Component 클래스 컴포넌트일 때
 
   // state = {

@@ -1,12 +1,15 @@
 // 할 일 목록 나타나는 리스트 컴포넌트로 분리
-// rcf(export 포함) : 함수형 컴포넌트 , rfce(export 따로)
+// rcf(export 포함) = rfc : 함수형 컴포넌트 , rfce(export 따로), rafce (화살표 함수 형식)
 // rce : 클래스형 컴포넌트
+
+// rcf, rfce, rafce
 
 import React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import List from "./List";
 
-export default function Lists({ todoData, setTodoData }) {
+const Lists = React.memo(({ todoData, setTodoData }) => {
+  console.log("Lists Component");
   // x버튼 (함수형 만들 때 const 추가해주기)
   // const btnstyle = {
   //   color: "#fff",
@@ -79,4 +82,6 @@ export default function Lists({ todoData, setTodoData }) {
       </DragDropContext>
     </div>
   );
-}
+});
+
+export default Lists;

@@ -1,6 +1,8 @@
 import React from "react";
 
 export default function Form({ handleSubmit, value, setValue }) {
+  console.log("Form Component");
+
   // 할 일 입력 이벤트 value값 바꿔주기
   const handleChange = (e) => {
     console.log("e", e.target.value);
