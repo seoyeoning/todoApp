@@ -1,15 +1,15 @@
 // 클래스형 컴포넌트
-import React, { useState, useCallback } from "react";
-import "./App.css";
-import Lists from "./components/Lists";
-import Form from "./components/Form";
+import React, { useState, useCallback } from 'react';
+import './App.css';
+import Lists from './components/Lists';
+import Form from './components/Form';
 
-const initialTodoData = localStorage.getItem("todoData")
-  ? JSON.parse(localStorage.getItem("todoData"))
+const initialTodoData = localStorage.getItem('todoData')
+  ? JSON.parse(localStorage.getItem('todoData'))
   : [];
 
 export default function App() {
-  console.log("App Component");
+  console.log('App Component');
   // export default class App extends Component 클래스 컴포넌트일 때
 
   // state = {
@@ -19,7 +19,7 @@ export default function App() {
 
   // 함수형
   const [todoData, setTodoData] = useState(initialTodoData);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
   // 할 일 입력 후 목록에 추가하고 쓴거 지워주기
   const handleSubmit = (e) => {
@@ -34,8 +34,8 @@ export default function App() {
     // 원래 있던 할 일에 새로운 할 일 더해주기
     // this.setState({ todoData: [...todoData, newTodo], value: "" }); 클래스
     setTodoData((prev) => [...prev, newTodo]);
-    localStorage.setItem("todoData", JSON.stringify([...todoData, newTodo]));
-    setValue("");
+    localStorage.setItem('todoData', JSON.stringify([...todoData, newTodo]));
+    setValue('');
   };
 
   // 할 일 목록 삭제할 때
@@ -45,19 +45,19 @@ export default function App() {
       //console.log('newTodoData', newTodoData)
       // this.setState({ todoData: newTodoData }); 클래스 컴포넌트
       setTodoData(newTodoData);
-      localStorage.setItem("todoData", JSON.stringify(newTodoData));
+      localStorage.setItem('todoData', JSON.stringify(newTodoData));
     },
     [todoData]
   );
 
   const handleRemoveClick = () => {
     setTodoData([]);
-    localStorage.setItem("todoData", JSON.stringify([]));
+    localStorage.setItem('todoData', JSON.stringify([]));
   };
 
   // 함수형은 render 없이 바로 return
   return (
-    <div className="flex items-start justify-center w-screen h-screen bg-pink-100">
+    <div className="flex items-start justify-center w-screen h-screen bg-blue-400">
       <div className="w-full p-6 m-4 bg-white rounded shadow lg:w-3/4 lg:max-w-lg">
         <div className="flex justify-between mb-3">
           <h1>Todo List</h1>
