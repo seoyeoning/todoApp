@@ -1,5 +1,5 @@
-import { data } from "autoprefixer";
-import React, { useState } from "react";
+// import { data } from "autoprefixer";
+import React, { useState } from 'react';
 
 const List = React.memo(
   ({
@@ -12,7 +12,7 @@ const List = React.memo(
     snapshot,
     handleClick,
   }) => {
-    console.log("List Component");
+    console.log('List Component');
 
     const [isEditing, setIsEditing] = useState(false);
     const [editedTitle, setEditedTitle] = useState(title);
@@ -27,7 +27,7 @@ const List = React.memo(
       });
       //this.setState({ todoData: newTodoData }); 클래스
       setTodoData(newTodoData);
-      localStorage.setItem("todoData", JSON.stringify(newTodoData));
+      localStorage.setItem('todoData', JSON.stringify(newTodoData));
     };
 
     const handleEditChange = (event) => {
@@ -44,7 +44,7 @@ const List = React.memo(
         return data;
       });
       setTodoData(newTodoData);
-      localStorage.setItem("todoData", JSON.stringify(newTodoData));
+      localStorage.setItem('todoData', JSON.stringify(newTodoData));
       setIsEditing(false);
     };
 
@@ -87,7 +87,7 @@ const List = React.memo(
           ref={provided.innerRef}
           {...provided.dragHandleProps}
           className={`${
-            snapshot.isDragging ? "bg-gray-400" : "bg-gray-100"
+            snapshot.isDragging ? 'bg-gray-400' : 'bg-gray-100'
           } flex items-center justify-between h-full px-4 py-1 my-2 text-gray-600 border rounded`}
         >
           <div className="items-center">
@@ -95,9 +95,9 @@ const List = React.memo(
               type="checkbox"
               defaultChecked={completed}
               onChange={() => handleCompleChange(id)}
-            />{" "}
-            <span className={completed ? "line-through" : undefined}>
-              {title}{" "}
+            />
+            <span className={completed ? 'line-through' : undefined}>
+              {title}
             </span>
           </div>
           <div className="items-center">
